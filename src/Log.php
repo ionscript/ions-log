@@ -69,11 +69,56 @@ class Log implements LogInterface
     }
 
     /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     * @return void
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasOption($key)
+    {
+        return isset($this->options[$key]);
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getOption($key)
+    {
+        return $this->options[$key];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function setOption($key, $value)
+    {
+        $this->options[$key] = $value;
+    }
+
+    /**
      * @param $logger
      * @param int $priority
      * @return $this
      */
-    public function set($logger, $priority = 1)
+    public function setLogger($logger, $priority = 1)
     {
         $this->loggers->insert($logger, $priority);
 
@@ -96,7 +141,7 @@ class Log implements LogInterface
      */
     public function setFileLogger($filename = '')
     {
-        $file = $this->options['path'] . '/' . ($filename ?: $this->options['filename']);
+        $file = $this->options['path'] . DIRECTORY_SEPARATOR . ($filename ?: $this->options['filename']);
 
         $this->set(new Logger\File($file));
 

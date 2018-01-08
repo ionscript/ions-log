@@ -130,7 +130,7 @@ class Log implements LogInterface
      */
     public function setOutputLogger()
     {
-        $this->set(new Logger\Output);
+        $this->setLogger(new Logger\Output);
 
         return $this;
     }
@@ -143,7 +143,7 @@ class Log implements LogInterface
     {
         $file = $this->options['path'] . DIRECTORY_SEPARATOR . ($filename ?: $this->options['filename']);
 
-        $this->set(new Logger\File($file));
+        $this->setLogger(new Logger\File($file));
 
         return $this;
     }
